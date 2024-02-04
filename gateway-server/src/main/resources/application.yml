@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: movie-rental-core
+          uri: lb://movie-rental-core
+          predicates:
+            - Path=/api/movie-rental-service/**
+          filters:
+            - StripPrefix=2
+        - id: movie-rental-membership
+          uri: lb://movie-rental-membership
+          predicates:
+            - Path=/api/movie-rental-membership-service/**
+          filters:
+            - StripPrefix=2
+        - id: membership-service
+          uri: lb://membership-service
+          predicates:
+            - Path=/api/membership-service/**
+          filters:
+            - StripPrefix=2
+        - id: imagenes-service
+          uri: lb://imagenes-service
+          predicates:
+            - Path=/api/images-service/**
+          filters:
+            - StripPrefix=2
